@@ -12,6 +12,7 @@
   --red:#ff4444;--red-dim:rgba(255,68,68,0.15);--red-glow:rgba(255,68,68,0.07);
   --glass:rgba(255,255,255,0.05);--glass-b:rgba(255,255,255,0.1);--glass-h:rgba(255,255,255,0.08);
   --text:#ede9e3;--muted:rgba(237,233,227,0.5);--dim:rgba(237,233,227,0.25);
+  --green:rgba(52,211,153,0.85);--green-dim:rgba(52,211,153,0.12);--green-b:rgba(52,211,153,0.2);
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:#060608;color:var(--text);min-height:100vh;overflow-x:hidden}
@@ -29,6 +30,8 @@ body::after{
   background-size:64px 64px;pointer-events:none;z-index:0;
 }
 .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 22px}
+
+/* HEADER */
 header{padding:70px 0 44px;text-align:center;animation:fadeUp .55s ease both}
 .badge{
   display:inline-flex;align-items:center;gap:7px;
@@ -41,20 +44,39 @@ header{padding:70px 0 44px;text-align:center;animation:fadeUp .55s ease both}
 h1{font-family:'Syne',sans-serif;font-size:clamp(36px,7vw,70px);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:8px}
 h1 span{color:var(--red)}
 .sub{font-size:15.5px;color:var(--muted);font-weight:300;margin-top:14px;line-height:1.65;max-width:540px;margin-left:auto;margin-right:auto}
+
+/* CARDS */
 .card{
   background:var(--glass);border:1px solid var(--glass-b);border-radius:20px;
-  padding:26px 30px;margin:38px 0;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
-  animation:fadeUp .55s .08s ease both;
+  padding:26px 30px;margin:0 0 16px;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
 }
 .card h2{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--red);margin-bottom:13px}
+.card.green h2{color:var(--green)}
 .card p{font-size:14px;line-height:1.78;color:rgba(237,233,227,.72);margin-bottom:10px}
 .card p:last-child{margin-bottom:0}
 .card strong{color:var(--text);font-weight:500}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:0 0 34px;animation:fadeUp .55s .13s ease both}
+.card ul{margin:8px 0 10px 0;padding:0;list-style:none;display:grid;gap:7px}
+.card ul li{
+  font-size:13.5px;line-height:1.6;color:rgba(237,233,227,.72);
+  padding-left:18px;position:relative;
+}
+.card ul li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--green);opacity:.8}
+.card.red ul li::before{background:var(--red)}
+.note{
+  background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.18);
+  border-radius:12px;padding:13px 16px;margin-top:12px;
+  font-size:12.5px;color:rgba(237,233,227,.6);line-height:1.65;font-style:italic;
+}
+.note strong{color:rgba(237,233,227,.85);font-style:normal}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:0 0 16px}
 .stat{background:var(--glass);border:1px solid var(--glass-b);border-radius:13px;padding:17px 18px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);text-align:center}
 .stat-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--red);line-height:1;margin-bottom:4px}
 .stat-l{font-size:11px;color:var(--muted);letter-spacing:.04em}
-.search-wrap{position:relative;margin-bottom:18px;animation:fadeUp .55s .18s ease both}
+
+/* SEARCH */
+.search-wrap{position:relative;margin:16px 0 14px}
 .s-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);pointer-events:none}
 .s-icon svg{width:17px;height:17px;stroke:var(--muted)}
 #searchInput{
@@ -73,9 +95,11 @@ h1 span{color:var(--red)}
 }
 .clr:hover{background:rgba(255,255,255,.13)}
 .clr svg{width:13px;height:13px;display:block;stroke:currentColor}
-.rcount{font-size:12px;color:var(--muted);margin-bottom:13px;padding-left:2px}
+.rcount{font-size:12px;color:var(--muted);margin-bottom:12px;padding-left:2px}
 .rcount span{color:var(--text);font-weight:500}
-#schoolList{display:grid;gap:5px;animation:fadeUp .55s .22s ease both}
+
+/* SCHOOL LIST */
+#schoolList{display:grid;gap:5px}
 .si{
   background:var(--glass);border:1px solid var(--glass-b);border-radius:10px;
   padding:11px 17px;font-size:13px;color:rgba(237,233,227,.78);
@@ -90,11 +114,24 @@ h1 span{color:var(--red)}
 mark{background:rgba(255,68,68,.22);color:#ff8888;border-radius:3px;padding:0 2px}
 .no-res{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px}
 .no-res strong{display:block;font-family:'Syne',sans-serif;font-size:20px;color:var(--text);margin-bottom:7px}
-footer{padding:56px 0 38px;text-align:center}
-footer p{font-size:11.5px;color:var(--dim);line-height:1.9}
+
+/* ANIMATIONS */
+header{animation:fadeUp .55s ease both}
+.card-1{animation:fadeUp .55s .07s ease both}
+.card-2{animation:fadeUp .55s .11s ease both}
+.card-3{animation:fadeUp .55s .15s ease both}
+.stats{animation:fadeUp .55s .19s ease both}
+.search-wrap{animation:fadeUp .55s .23s ease both}
+#schoolList{animation:fadeUp .55s .27s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* FOOTER */
+footer{padding:52px 0 36px;text-align:center}
+footer p{font-size:11.5px;color:var(--dim);line-height:2}
 footer a{color:rgba(255,68,68,.65);text-decoration:none}
 footer a:hover{color:var(--red)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.credit{margin-top:18px;font-size:11px;color:rgba(237,233,227,.18);letter-spacing:.04em}
+
 @media(max-width:580px){
   .stats{grid-template-columns:1fr 1fr}
   .stats .stat:last-child{grid-column:span 2}
@@ -111,15 +148,37 @@ footer a:hover{color:var(--red)}
     <p class="sub">Search the confirmed list of institutions affected by the ShinyHunters breach of Instructure (Canvas) on May 7, 2026.</p>
   </header>
 
-  <div class="card">
+  <div class="card card-1">
     <h2>What happened</h2>
     <p>A cybercrime group called <strong>ShinyHunters</strong> breached Instructure, the company behind Canvas, the learning management system used by schools and universities across the country and around the world. They first claimed the breach on <strong>May 3, 2026</strong>, and on May 7 they pushed ransom messages directly onto Canvas pages at hundreds of institutions, shutting many of them down mid-semester.</p>
     <p>The stolen data reportedly includes <strong>names, email addresses, and student ID numbers</strong> across what ShinyHunters claims is 231 million unique accounts. The group set a deadline of <strong>May 12, 2026</strong>, threatening to release everything publicly if Instructure does not respond. There is no confirmed evidence that passwords, financial information, or government IDs were part of the breach.</p>
-    <p>This affects K-12 schools and universities alike. If your school is on this list, your information was likely part of what was taken. Be cautious of phishing emails using your school address, and keep an eye on official communications from your institution.</p>
+    <p>This affects K-12 schools and universities alike. If your school is on this list, your information was likely part of what was taken.</p>
+    <div class="note">
+      <strong>Note on how schools are listed:</strong> Some entries appear under their full district name rather than a common abbreviation. For example, <strong>Deer Valley USD</strong> is listed as "Deer Valley USD" and <strong>Placentia Yorba Linda USD</strong> is listed by its full name. If you don't find your school right away, try searching a keyword from the full name rather than just an abbreviation.
+    </div>
+  </div>
+
+  <div class="card card-2 green">
+    <h2>How to protect yourself</h2>
+    <p>Even if passwords weren't confirmed stolen, your email address and student ID being out there is enough to cause problems. Here's what you should do now:</p>
+    <ul>
+      <li><strong>Watch for phishing emails.</strong> Attackers now know your school email address. Be skeptical of any unexpected emails asking you to log in, verify your account, or click a link, even if they look official.</li>
+      <li><strong>Change your Canvas password anyway.</strong> Even if passwords weren't in the breach, it's a good habit after any incident involving your account.</li>
+      <li><strong>Enable multi-factor authentication (MFA)</strong> on your school account and any personal accounts that share the same email or password.</li>
+      <li><strong>Don't reuse passwords.</strong> If your school email password is the same as anything else, change those too. Use a password manager if you haven't started already.</li>
+      <li><strong>Monitor for unusual account activity.</strong> Check your school email for logins you don't recognize. Most platforms show recent login history in account settings.</li>
+      <li><strong>Be cautious with your student ID.</strong> If someone contacts you referencing your student ID number, treat it as a red flag. It may be a social engineering attempt.</li>
+      <li><strong>Follow your institution's official communications.</strong> Your school's IT department will likely send guidance. Look for messages from official domains only, not lookalike addresses.</li>
+    </ul>
+  </div>
+
+  <div class="card card-3">
+    <h2>What we don't know yet</h2>
+    <p>Instructure has stated there is no current evidence that passwords, dates of birth, government identification numbers, or financial data were taken. However, the full scope of the breach is still being investigated, and the situation may change before the May 12 deadline. Check back for updates and follow your school's official channels.</p>
   </div>
 
   <div class="stats">
-    <div class="stat"><div class="stat-n" id="totalCount">...</div><div class="stat-l">Institutions listed</div></div>
+    <div class="stat"><div class="stat-n" id="totalCount">9,316</div><div class="stat-l">Institutions listed</div></div>
     <div class="stat"><div class="stat-n">231M</div><div class="stat-l">Emails stolen</div></div>
     <div class="stat"><div class="stat-n">May 12</div><div class="stat-l">Ransom deadline</div></div>
   </div>
@@ -140,9 +199,14 @@ footer a:hover{color:var(--red)}
   <div id="schoolList"></div>
 
   <footer>
-    <p>Data sourced from the ShinyHunters breach disclosure, May 2026.<br>
-    If your school is listed, contact your IT department and watch for phishing attempts.<br>
-    <a href="https://www.cisa.gov/report" target="_blank">Report suspicious activity to CISA</a></p>
+    <p>
+      Data sourced from the ShinyHunters breach disclosure, May 2026.<br>
+      If your school is listed, contact your IT department and watch for phishing attempts.<br>
+      <a href="https://www.cisa.gov/report" target="_blank">Report suspicious activity to CISA</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://support.google.com/accounts/answer/185833" target="_blank">Set up 2-factor authentication</a>
+    </p>
+    <p class="credit">Research and site by Dane Bellamy</p>
   </footer>
 
 </div>
@@ -159,7 +223,6 @@ footer a:hover{color:var(--red)}
 const RAW_LIST = `
 PASTE YOUR LIST HERE
 `;
-
 Wiley Higher ED
 The University of British Columbia
 Canvas Network
@@ -8970,7 +9033,7 @@ Antelope Valley Union High School District
    Edgenuity
  Max Mirafuentes Academy
 
-
+=
 
 const JUNK = [
   'This file has been downloaded','Our DLS is accessible','These files were leaked',
@@ -8979,15 +9042,11 @@ const JUNK = [
 ];
 
 function parseList(raw) {
-  const seen = new Set();
-  const out  = [];
+  const seen = new Set(), out = [];
   for (let line of raw.split('\n')) {
-    // strip leading numbers (e.g. "1." "23)" "456 " "7 - ")
     line = line.replace(/^\s*\d+\s*[\.\)\:\-]?\s*/, '');
-    // strip leading bullets / asterisks / dashes / special chars
     line = line.replace(/^[\s\*\-\u2022\u25CF\u25CB\u2013\u2014]+/, '');
-    // collapse multiple internal spaces
-    line = line.replace(/\s{2,}/g, ' ').trim();
+    line = line.replace(/\s{2,}/g,' ').trim();
     if (!line) continue;
     if (JUNK.some(j => line.includes(j))) continue;
     if (/^=+$/.test(line)) continue;
@@ -8998,63 +9057,47 @@ function parseList(raw) {
 }
 
 const schools = parseList(RAW_LIST);
+const listEl=document.getElementById('schoolList'),searchEl=document.getElementById('searchInput'),
+      rcountEl=document.getElementById('rcount'),totalEl=document.getElementById('totalCount'),
+      clrBtn=document.getElementById('clrBtn');
 
-const listEl   = document.getElementById('schoolList');
-const searchEl = document.getElementById('searchInput');
-const rcountEl = document.getElementById('rcount');
-const totalEl  = document.getElementById('totalCount');
-const clrBtn   = document.getElementById('clrBtn');
-
-function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
-
-function highlight(text, q) {
-  if (!q) return esc(text);
-  const safe = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return esc(text).replace(new RegExp('('+safe+')','gi'),'<mark>$1</mark>');
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function highlight(t,q){
+  if(!q)return esc(t);
+  return esc(t).replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');
 }
-
-function render(q) {
-  const sq = q.trim().toLowerCase();
-  const filtered = sq ? schools.filter(s => s.toLowerCase().includes(sq)) : schools;
-  listEl.innerHTML = '';
-  if (filtered.length === 0) {
-    listEl.innerHTML = `<div class="no-res"><strong>No results</strong>Try a different spelling or search term.</div>`;
-    rcountEl.innerHTML = '';
-    return;
+function render(q){
+  const sq=q.trim().toLowerCase();
+  const f=sq?schools.filter(s=>s.toLowerCase().includes(sq)):schools;
+  listEl.innerHTML='';
+  if(!f.length){
+    listEl.innerHTML='<div class="no-res"><strong>No results</strong>Try searching by a keyword from the full district name.</div>';
+    rcountEl.innerHTML='';return;
   }
-  if (schools.length > 0) {
-    rcountEl.innerHTML = sq
-      ? `Showing <span>${filtered.length.toLocaleString()}</span> of <span>${schools.length.toLocaleString()}</span> institutions`
-      : `<span>${filtered.length.toLocaleString()}</span> institutions in the breach`;
-  }
-  const frag = document.createDocumentFragment();
-  filtered.forEach(school => {
-    const div = document.createElement('div');
-    div.className = 'si' + (sq ? ' hl' : '');
-    div.innerHTML = `<span class="dot"></span>${highlight(school, q.trim())}`;
-    frag.appendChild(div);
+  rcountEl.innerHTML=sq
+    ?`Showing <span>${f.length.toLocaleString()}</span> of <span>${schools.length.toLocaleString()}</span> institutions`
+    :`<span>${f.length.toLocaleString()}</span> institutions in the breach`;
+  const frag=document.createDocumentFragment();
+  f.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='si'+(sq?' hl':'');
+    d.innerHTML=`<span class="dot"></span>${highlight(s,q.trim())}`;
+    frag.appendChild(d);
   });
   listEl.appendChild(frag);
 }
-
-function updateTotal() {
-  const n = schools.length;
-  totalEl.textContent = n >= 1000 ? (n/1000).toFixed(1)+'K' : n > 0 ? n.toLocaleString() : '—';
+function updateTotal(){
+  const n=schools.length;
+  totalEl.textContent=n>=1000?(n/1000).toFixed(1)+'K':n>0?n.toLocaleString():'—';
 }
-
-searchEl.addEventListener('input', () => {
-  clrBtn.style.display = searchEl.value ? 'block' : 'none';
+searchEl.addEventListener('input',()=>{
+  clrBtn.style.display=searchEl.value?'block':'none';
   render(searchEl.value);
 });
-clrBtn.addEventListener('click', () => {
-  searchEl.value = '';
-  clrBtn.style.display = 'none';
-  render('');
-  searchEl.focus();
+clrBtn.addEventListener('click',()=>{
+  searchEl.value='';clrBtn.style.display='none';render('');searchEl.focus();
 });
-
-updateTotal();
-render('');
+updateTotal();render('');
 </script>
 </body>
 </html>
